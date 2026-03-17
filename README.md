@@ -45,3 +45,18 @@ docker exec -it airflow_webserver cat /opt/airflow/standalone_admin_password.txt
 
 Spark Master: http://localhost:8080
    git clone https://github.com/marcelozanette/desafio_SRM.git
+
+5. Configurações nas Interfaces Web
+Agora que os containers estão rodando, configure as ferramentas:
+A. MinIO (Armazenamento)
+Acesse: http://localhost:9001 (User: admin / Pass: password123).
+Vá em Buckets -> Create Bucket -> Nome: cnpj-data.
+B. Criar a conexão do minio no Airflow (Orquestrador)
+Acesse: http://localhost:8081 (User: admin / Senha do passo 4).
+Vá em Admin -> Connections -> Add New.
+Conn Id: minio_conn
+Conn Type: Amazon S3 (ou Generic)
+Extra:
+json
+{"aws_access_key_id": "admin", "aws_secret_access_key": "password123", "endpoint_url": "http://minio:9000", "region_name": "us-east-1"}
+Use o código com cuidado.
